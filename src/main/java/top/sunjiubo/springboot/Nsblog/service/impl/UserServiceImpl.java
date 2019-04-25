@@ -7,12 +7,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import top.sunjiubo.springboot.Nsblog.dao.UserRepository;
+import top.sunjiubo.springboot.Nsblog.Repository.UserRepository;
 import top.sunjiubo.springboot.Nsblog.model.User;
 import top.sunjiubo.springboot.Nsblog.service.UserService;
 
 import javax.transaction.Transactional;
-import java.util.Collection;
 import java.util.List;
 
 @Service
