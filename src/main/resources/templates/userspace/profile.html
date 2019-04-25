@@ -4,6 +4,11 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head th:replace="~{fragments/header :: header}">
 </head>
+<!--<head>-->
+	<!--<title>个人设置</title>-->
+	<!--&lt;!&ndash; jQuery image cropping plugin CSS &ndash;&gt;-->
+	<!--<link href="../../css/cropbox.css" th:href="@{/css/cropbox.css}" rel="stylesheet">-->
+<!--</head>-->
 <body>
 <!-- Page Content -->
 <div class="container blog-content-container">
@@ -22,8 +27,6 @@
 								<img th:src="${userModel.user.avatar} == null ? '/images/avatar-defualt.jpg' : ${userModel.user.avatar}" class="blog-avatar blog-avatar-230">
       
 							</a>
- 
-                        
                       </a>
                     </span>
 
@@ -107,7 +110,10 @@
 
  
 <!-- JavaScript -->
-<script src="../../js/userspace/main.js" th:src="@{/js/userspace/main.js}"></script>
 
+<script src="../../js/userspace/main.js" th:src="@{/js/userspace/main.js}"></script>
+<script th:inline="javascript">
+	var fileServerUrl = [[${userModel.fileServerUrl}]];
+</script>
 </body>
 </html>

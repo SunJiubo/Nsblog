@@ -147,4 +147,12 @@ public class Blog implements Serializable {
     public void setTags(String tags) {
         this.tags = tags;
     }
+
+    @Override
+    public String toString() {
+        return "Blog{" +
+                "id=" + id +
+                ", user=" + user +
+                '}';
+    }
 }

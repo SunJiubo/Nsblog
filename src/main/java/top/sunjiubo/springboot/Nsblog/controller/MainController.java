@@ -14,6 +14,7 @@ import top.sunjiubo.springboot.Nsblog.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * 主页控制器
@@ -65,6 +66,8 @@ public class MainController {
         List<Authority> authorities = new ArrayList<>();
         authorities.add(authorityService.getAuthorityById(ROLE_USER_AUTHORITY_ID));
         user.setAuthorities(authorities);
+        user.setAvatar(String.format("http://images.nowcoder.com/head/%dt.png",
+                new Random().nextInt(1000)));
         userService.saveorUpdateUser(user);
         return "redirect:/login";
     }
