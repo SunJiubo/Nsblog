@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import top.sunjiubo.springboot.Nsblog.model.Blog;
 import top.sunjiubo.springboot.Nsblog.model.User;
+import top.sunjiubo.springboot.Nsblog.model.Vote;
 import top.sunjiubo.springboot.Nsblog.service.BlogService;
 import top.sunjiubo.springboot.Nsblog.service.UserService;
 import top.sunjiubo.springboot.Nsblog.util.ConstraintViolationExceptionHandler;
@@ -217,6 +218,19 @@ public class UserspaceController {
             }
         }
 
+        List<Vote> votes = blog.getVotes();
+        Vote currentVote = null;
+
+        if(principal!=null){
+            for (Vote vote:votes){
+                if (vote.getUser().getUsername().equals(principal.getUsername())) {
+                    currentVote = vote;
+                    break;
+                }
+            }
+        }
+
+        model.addAttribute("currentVote",currentVote);
         model.addAttribute("isBlogOwner",isBlogOwner);
         model.addAttribute("blogModel",blog);
 

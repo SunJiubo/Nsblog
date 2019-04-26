@@ -9,6 +9,7 @@ import top.sunjiubo.springboot.Nsblog.Repository.BlogRepository;
 import top.sunjiubo.springboot.Nsblog.model.Blog;
 import top.sunjiubo.springboot.Nsblog.model.Comment;
 import top.sunjiubo.springboot.Nsblog.model.User;
+import top.sunjiubo.springboot.Nsblog.model.Vote;
 import top.sunjiubo.springboot.Nsblog.service.BlogService;
 
 
@@ -70,6 +71,25 @@ public class BlogServiceImpl implements BlogService {
     public void removeComment(Long blogId, Long commentId) {
         Blog originalBlog = blogRepository.findOne(blogId);
         originalBlog.removeComment(commentId);
+        this.saveBlog(originalBlog);
+    }
+
+    @Override
+    public Blog creatVote(Long blogId) {
+        Blog originaBlog = blogRepository.findOne(blogId);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Vote vote = new Vote(user);
+        boolean isExist = originaBlog.addVote(vote);
+        if(isExist){
+            throw  new IllegalArgumentException("该用户已经点过赞了");
+        }
+        return this.saveBlog(originaBlog);
+    }
+
+    @Override
+    public void removeVote(Long blogId, Long voteId) {
+        Blog originalBlog = blogRepository.findOne(blogId);
+        originalBlog.removeVote(voteId);
         this.saveBlog(originalBlog);
     }
 }
