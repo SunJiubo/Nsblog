@@ -1,6 +1,8 @@
 package top.sunjiubo.springboot.Nsblog.controller;
 
 import com.sun.org.apache.xml.internal.resolver.Catalog;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -45,6 +47,7 @@ public class UserspaceController {
     @Value("${file.server.url}")
     private String fileServerUrl;
 
+    @ApiOperation("获取个人的所有微博")
     @GetMapping("/{username}")
     public String userSpace(@PathVariable("username") String username, Model model){
         User user = (User)userDetailsService.loadUserByUsername(username);
@@ -58,6 +61,8 @@ public class UserspaceController {
      * @param model
      * @return
      */
+    @ApiOperation("获取个人设置界面")
+    @ApiImplicitParam(name = "username",value = "账户",required = true,dataType = "String")
     @GetMapping("/{username}/profile")
     @PreAuthorize("authentication.name.equals(#username)")
     public ModelAndView profile(@PathVariable("username") String username,Model model){
@@ -102,6 +107,7 @@ public class UserspaceController {
     @PreAuthorize("authentication.name.equals(#username)")
     public ModelAndView avatar(@PathVariable("username") String username, Model model) {
         User  user = (User)userDetailsService.loadUserByUsername(username);
+        System.out.println("头像！！！！-----------------------");
         model.addAttribute("user", user);
         return new ModelAndView("/userspace/avatar", "userModel", model);
     }
@@ -119,6 +125,7 @@ public class UserspaceController {
             @PathVariable("username") String username,
             @RequestBody User user) {
         String avatarUrl = user.getAvatar();
+        System.out.println("提交头像----------------------------------");
 
         User originalUser = userService.getUserById(user.getId());
         originalUser.setAvatar(avatarUrl);
