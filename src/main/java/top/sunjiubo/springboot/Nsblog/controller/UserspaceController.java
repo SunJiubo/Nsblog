@@ -53,7 +53,7 @@ public class UserspaceController {
     public String userSpace(@PathVariable("username") String username, Model model){
         User user = (User)userDetailsService.loadUserByUsername(username);
         model.addAttribute(user);
-        return "redirect:/u/"+username+"/blogs";
+        return "redirect:/u/"+username+"/blog";
     }
 
     /**
@@ -234,7 +234,7 @@ public class UserspaceController {
         model.addAttribute("isBlogOwner",isBlogOwner);
         model.addAttribute("blogModel",blog);
 
-        return "/userspace/blogs";
+        return "/userspace/blog";
     }
 
     @DeleteMapping("/{username}/blogs/{id}")
