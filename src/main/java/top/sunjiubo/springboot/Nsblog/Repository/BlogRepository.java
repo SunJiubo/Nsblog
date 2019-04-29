@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import top.sunjiubo.springboot.Nsblog.model.Blog;
+import top.sunjiubo.springboot.Nsblog.model.Catalog;
 import top.sunjiubo.springboot.Nsblog.model.User;
 
 //import com.waylau.spring.boot.blog.domain.Catalog;
@@ -24,8 +25,8 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
 	 * @return
 	 * @see
 	 */
-//	@Deprecated
-//	Page<Blog> findByUserAndTitleLikeOrderByCreateTimeDesc(User user, String title, Pageable pageable);
+	@Deprecated
+	Page<Blog> findByUserAndTitleLikeOrderByCreateTimeDesc(User user, String title, Pageable pageable);
 	
 	/**
 	 * 根据用户名分页查询用户列表
@@ -54,5 +55,5 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
 	 * @param pageable
 	 * @return
 	 */
-//	Page<Blog> findByCatalog(Catalog catalog, Pageable pageable);
+	Page<Blog> findByCatalog(Catalog catalog, Pageable pageable);
 }

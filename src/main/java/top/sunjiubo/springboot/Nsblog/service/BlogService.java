@@ -3,6 +3,7 @@ package top.sunjiubo.springboot.Nsblog.service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import top.sunjiubo.springboot.Nsblog.model.Blog;
+import top.sunjiubo.springboot.Nsblog.model.Catalog;
 import top.sunjiubo.springboot.Nsblog.model.User;
 
 public interface BlogService {
@@ -44,6 +45,13 @@ public interface BlogService {
      */
     Page<Blog> listBlogsByTitleVoteAndSort(User user,String title,Pageable pageable);
 
+    /**
+     * 根据分类进行查询
+     * @param catalog
+     * @param pageable
+     * @return
+     */
+    Page<Blog> listBlogsByCatalog(Catalog catalog, Pageable pageable);
     /**
      * 阅读量递增
      * @param id
